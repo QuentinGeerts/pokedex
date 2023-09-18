@@ -1,11 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {NotFoundComponent} from "./shared/components/not-found/not-found.component";
 
 const routes: Routes = [
   {path: 'pokedex', loadChildren: () => import('./pokedex/pokedex.module').then(m => m.PokedexModule)},
 
 
-  {path: '', redirectTo: 'pokedex', pathMatch: "full"}
+  {path: '', redirectTo: 'pokedex', pathMatch: "full"},
+  {path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({
