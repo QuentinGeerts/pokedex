@@ -1,0 +1,18 @@
+<div *ngIf="pokemons && pokemonsRequest">
+  <ul class="list-group">
+    <li *ngFor="let pokemon of pokemons; index as i" class="list-group-item list-group-item-action">
+      <a (click)="select(pokemon.species.name)">
+        {{ pokemon.species.names | translate : 'fr' }}
+      </a>
+    </li>
+  </ul>
+
+  <div class="d-flex justify-content-between my-3">
+    <div class="">
+      <button (click)="load(pokemonsRequest.previous)" [disabled]="!pokemonsRequest.previous" class="btn btn-outline-secondary">Précédent</button>
+    </div>
+    <div class="">
+      <button (click)="load(pokemonsRequest.next)" [disabled]="!pokemonsRequest.next" class="btn btn-outline-secondary">Suivant</button>
+    </div>
+  </div>
+</div>

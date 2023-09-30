@@ -1,0 +1,43 @@
+<div *ngIf="isLoading" class="container">
+  <app-loader/>
+</div>
+
+<div *ngIf="pokemon && !isLoading" class="container-">
+
+  <div class="row">
+
+    <div class="row d-flex justify-content-center">
+      <div class="col-sm-6 col-md-4 col-lg-3 col-12 mx-auto">
+        <!--        <img [alt]="pokemon.details.name" [src]="pokemon.details.sprites.other['official-artwork'].front_default"-->
+        <!--             class="d-block p-3 w-100 mx-auto">-->
+      </div>
+
+      <div class="col-sm-6 col-md-8 col-lg-9 col-12">
+        <div class="card" style="width: 18rem;">
+          <img [alt]="pokemon.details.name" [src]="pokemon.details.sprites.other['official-artwork'].front_default" class="card-img-top p-4">
+          <div class="card-body">
+            <h5 class="card-title">{{ pokemon.species.names | translate : 'fr' | titlecase }} -
+              n°{{ pokemon.details.id | number : '3.0-0' }}</h5>
+            <p class="card-text">{{ getDescription(pokemon, 'fr') }}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{ pokemon.details.weight / 100 }} kg</li>
+            <li class="list-group-item">{{ pokemon.details.height / 10 }} m</li>
+            <li class="list-group-item">
+              Caractéristiques :
+              <ul>
+                <li *ngFor="let stats of pokemon.details.stats">{{ stats.stat.name }} : {{ stats.base_stat }}</li>
+              </ul>
+            </li>
+          </ul>
+          <div class="card-body">
+            <a class="card-link" href="#">Card link</a>
+            <a class="card-link" href="#">Another link</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

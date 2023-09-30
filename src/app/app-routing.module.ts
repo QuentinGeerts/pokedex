@@ -4,8 +4,6 @@ import {NotFoundComponent} from "./shared/components/not-found/not-found.compone
 
 const routes: Routes = [
   {path: 'pokedex', loadChildren: () => import('./pokedex/pokedex.module').then(m => m.PokedexModule)},
-
-
   {path: '', redirectTo: 'pokedex', pathMatch: "full"},
   {path: '**', component: NotFoundComponent}
 ];
