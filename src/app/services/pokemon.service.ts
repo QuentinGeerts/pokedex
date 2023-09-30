@@ -5,7 +5,6 @@ import {PokemonsRequest} from "../models/pokemons-request";
 import {PokemonRequest} from "../models/pokemon-request";
 import {Species} from "../models/pokemon-species";
 import {Pokemon} from "../models/pokemon";
-import {Types} from "../models/pokemon-types";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +21,7 @@ export class PokemonService {
    * Permet de récupérer la liste des 20 premiers pokémons
    * @param url
    */
-  getAll(url: string = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0"): Observable<PokemonsRequest> {
+  getAll(url: string = "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0"): Observable<PokemonsRequest> {
     return this._httpClient.get<PokemonsRequest>(url);
   }
 
@@ -34,14 +33,15 @@ export class PokemonService {
     const pokemonDetails$: Observable<PokemonRequest> = this._httpClient.get<PokemonRequest>(`${this.BASE_URL}/pokemon/${nameOrId}`);
     const speciesDetails$: Observable<Species> = this._httpClient.get<Species>(`${this.BASE_URL}/pokemon-species/${nameOrId}`);
 
-    return forkJoin({pokemonDetails$, speciesDetails$}).pipe(
-      map(results => {
-        const pokemonDetails: PokemonRequest = results.pokemonDetails$;
-        const speciesDetails: Species = results.speciesDetails$;
+    return forkJoin({pokemonDetails$, speciesDetails$})
+      .pipe(
+        map(results => {
+          const pokemonDetails: PokemonRequest = results.pokemonDetails$;
+          const speciesDetails: Species = results.speciesDetails$;
 
-        return {details: {...pokemonDetails}, species: {...speciesDetails}}
-      })
-    )
+          return {details: {...pokemonDetails}, species: {...speciesDetails}}
+        })
+      )
   }
 
 }

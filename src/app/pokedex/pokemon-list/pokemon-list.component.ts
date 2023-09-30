@@ -50,13 +50,15 @@ export class PokemonListComponent implements OnInit {
   private loadMore(data: PokemonsRequest) {
     this.pokemons = [];
     data.results
-      .map(pokemon =>
+      .map(pokemon => {
+
         this._pokemonService
-          .get(pokemon.name)
+          .get(pokemon.url.split("/")[6])
           .subscribe({
             next: (value: Pokemon) => this.pokemons.push(value)
           })
-          .add(() => this.pokemons.sort((p1, p2) => p1.species.id - p2.species.id)))
+          .add(() => this.pokemons.sort((p1, p2) => p1.species.id - p2.species.id))
+      })
   }
 
 

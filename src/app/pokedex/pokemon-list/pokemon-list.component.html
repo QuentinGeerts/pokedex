@@ -9,10 +9,10 @@
 
   <div class="d-flex justify-content-between my-3">
     <div class="">
-      <button (click)="load(pokemonsRequest.previous)" [disabled]="!pokemonsRequest.previous" class="btn btn-outline-secondary">Précédent</button>
+      <button (click)="load(pokemonsRequest.previous)" [hidden]="!pokemonsRequest.previous" class="btn btn-outline-secondary">Précédent</button>
     </div>
     <div class="">
-      <button (click)="load(pokemonsRequest.next)" [disabled]="!pokemonsRequest.next" class="btn btn-outline-secondary">Suivant</button>
+      <button (click)="load(pokemonsRequest.next)" [hidden]="!pokemonsRequest.next" class="btn btn-outline-secondary">Suivant</button>
     </div>
   </div>
 </div>
